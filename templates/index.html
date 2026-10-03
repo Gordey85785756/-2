@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Погода</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f4f8;
+         display: flex; justify-content: center; padding-top: 60px; margin: 0; }
+  .card { background: #fff; padding: 30px 40px; border-radius: 12px;
+          box-shadow: 0 4px 16px rgba(0,0,0,.1); width: 340px; }
+  h1 { margin-top: 0; font-size: 22px; }
+  input { width: 100%; padding: 10px; font-size: 16px; box-sizing: border-box;
+          border: 1px solid #ccc; border-radius: 6px; }
+  button { margin-top: 10px; width: 100%; padding: 10px; font-size: 16px;
+           background: #2d7ff9; color: #fff; border: none;
+           border-radius: 6px; cursor: pointer; }
+  button:hover { background: #1c5fc4; }
+  .temp { font-size: 32px; font-weight: bold; }
+  .error { color: #c00; margin-top: 15px; }
+  .result { margin-top: 20px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Погода в городе</h1>
+    <form method="post">
+      <input type="text" name="city" placeholder="Например: Москва" autofocus>
+      <button type="submit">Узнать погоду</button>
+    </form>
+    {% if weather %}
+    <div class="result">
+      <div><b>{{ weather.city }}</b></div>
+      <div class="temp">{{ weather.temp }} °C</div>
+      <div>Ощущается как {{ weather.feels_like }} °C</div>
+      <div>{{ weather.description }}</div>
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>
